@@ -10,13 +10,14 @@ import pandas as pd
 from azureml.core.run import Run
 from azureml.data.dataset_factory import TabularDatasetFactory
 
-# TODO: Create TabularDataset using TabularDatasetFactory
-# Data is located at:
-# "https://automlsamplenotebookdata.blob.core.windows.net/automl-sample-notebook-data/bankmarketing_train.csv"
-
 ds = TabularDatasetFactory.from_delimited_files("https://automlsamplenotebookdata.blob.core.windows.net/automl-sample-notebook-data/bankmarketing_train.csv")
 
 run = Run.get_context()
+
+
+# TODO: Create TabularDataset using TabularDatasetFactory
+# Data is located at:
+# "https://automlsamplenotebookdata.blob.core.windows.net/automl-sample-notebook-data/bankmarketing_train.csv"
 
 def clean_data(data):
     # Dict for cleaning data
@@ -48,17 +49,20 @@ def clean_data(data):
 
 x, y = clean_data(ds)
 
+x_train, x_test, y_train, y_test = train_test_split(x,y, random_state=0)
+
+
 # TODO: Split data into train and test sets.
 
-### YOUR CODE HERE ###
+# ## YOUR CODE HERE ###
 
-split_length = round(x.shape[0]*0.75)
+# split_length = round(x.shape[0]*0.75)
 
-x_train = x[:split_length]
-y_train = y[:split_length]
+# x_train = x[:split_length]
+# y_train = y[:split_length]
 
-x_test = x[split_length:]
-y_test = y[split_length:]
+# x_test = x[split_length:]
+# y_test = y[split_length:]
 
 def main():
     # Add arguments to script
@@ -77,8 +81,8 @@ def main():
     accuracy = model.score(x_test, y_test)
     run.log("Accuracy", np.float(accuracy))
 
-    os.makedirs('./outputs', exist_ok=True)
-    joblib.dump(value=model, filename="./outputs/model.joblib")
+    os.makedirs('outputs', exist_ok=True)
+    joblib.dump(value=model, filename="outputs/model.joblib")
 
 if __name__ == '__main__':
     main()
