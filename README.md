@@ -6,7 +6,7 @@ In this project, we build and optimize an Azure ML pipeline using the Python SDK
 This model is then compared to an Azure AutoML run.
 
 ## Summary
-This project uses data from direct marketing campaigns of a Portuguese banking institution. The marketing campaigns are based on phone calls. It contains 20 features such as age, job and martial status. The target column contain only two categories(Yes and No), to determine if the client subscribed to the bank's term deposit. 
+This project uses data from direct marketing campaigns of a Portuguese banking institution. The marketing campaigns are based on phone calls. It contains 20 features such as age, job, and marital status. The target column contains only two categories (Yes and No), to determine if the client subscribed to the bank's term deposit. 
 
 The aim of the algorithms built using the Python SDK (w/ Hyperdrive) and AutoML is to accurately predict if a potential client will subscribe to the bank's term deposit. This is to assist in targeting resources in approaching clients that are most likely to subscribe.
 
@@ -24,7 +24,7 @@ A Logistic Regression model was first created and trained using Scikit-learn in 
 
 - Processed data is then split into a training and testing set
 
-- Scikit-learn was used to train an initial Logistic Regression model while specificing the value of two hyper parameters, C and max_iter. C represents the inverse of the regularization strength, while max_iter represents the maximum number of interations taken for the model to converge. These two parameters were initially passed in the python script so they can be optimised later on using Hyperdrive.
+- Scikit-learn was used to train an initial Logistic Regression model while specifying the value of two hyper parameters, C and max_iter. C represents the inverse of the regularization strength, while max_iter represents the maximum number of iterations taken for the model to converge. These two parameters were initially passed in the python script so they can be optimised later using Hyperdrive.
 
 - The trained model is then saved
 
@@ -32,7 +32,7 @@ The model had parameters of C = 0.1 and max_iter = 100, and achieved an accuracy
 
 ### Hyper Drive
 
-The initial model trained is then optimised using Hyperdrive. Hyperdrive is a method of implementing automatic hyperparameter tuning. Hyperparameter tuning is typically computationally expensive and manual, therefore, by using Hyperdrive we are able to automate this process and run experiments in parallel to efficiently optimize hyperparameters.
+The initial model trained is then optimised using Hyperdrive. Hyperdrive is a method of implementing automatic hyperparameter tuning. Hyperparameter tuning is typically computationally expensive and manual, therefore, by using Hyperdrive we can automate this process and run experiments in parallel to efficiently optimize hyperparameters.
 
 The steps taken to implement Hyperdrive were as follows:
 
@@ -46,13 +46,13 @@ The steps taken to implement Hyperdrive were as follows:
 
 Elaborating more on the second step in configuring the Hyperdrive, there are two extremely beneficial parameters that are included in the configuration; RandomParameterSampling and BanditPolicy.
 
-**RandomParameterSampling** is a parameter sampler that randomly selects hyperparameter values from a wide range specified by the user to train the model. This is much better than a grid sweep as it is not as computationally expensive and time-consuming, and can choose parameters that achieve high accuracy. Random sampler also supports early termination of low-performance runs, thus saving on computational resources. The parameters passed to the random sampler were:
+**RandomParameterSampling** is a parameter sampler that randomly selects hyperparameter values from a wide range specified by the user to train the model. This is much better than a grid sweep as it is not as computationally expensive and time-consuming and can choose parameters that achieve high accuracy. Random sampler also supports early termination of low-performance runs, thus saving on computational resources. The parameters passed to the random sampler were:
 
 - C: 0.01,0.1,10,100
 
 - max_iter: 50,100,150,200
 
-**BanditPolicy** is an early termination policy that terminates runs early if they are not achieving the same perfomance as the best model. This also adds to improving computational efficiency and saving time as it automatically terminates models with a poor perfomance.
+**BanditPolicy** is an early termination policy that terminates runs early if they are not achieving the same performance as the best model. This also adds to improving computational efficiency and saving time as it automatically terminates models with a poor performance.
 
 The best model had parameters of C = 10 and max_iter = 50, and achieved an accuracy of 91.44%.
 
@@ -62,7 +62,7 @@ The steps taken to implement AutoML were as follows:
 
 - Import the banking dataset using Azure TabularDataset Factory
 - Data is then cleaned and transformed using the cleaning function in train.py
-- AutoML was configured and a run was submitted to find the model with the best performace
+- AutoML was configured and a run was submitted to find the model with the best performance
 - The best model was saved
 
 The best performing model was a Voting Ensemble model with an accuracy of 91.78%. The hyper parameters of the model were as follows:
@@ -87,3 +87,4 @@ I think the main advantage of automl compared to hyperdrive is the ability of au
 The main area of improvement is to take the voting ensemble algorithm from the automl run and tune the hyper parameters using hyper drive to achieve better accuracy. We could also take the top five performing models and try and optimize them as well.
 
 We could also test the models' performances from the hyperdrive and automl runs against different error metrics such as the AUC.
+
