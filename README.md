@@ -18,15 +18,15 @@ The best performing model was found using the AutoML run and was a Voting Ensemb
 
 A Logistic Regression model was first created and trained using Scikit-learn in the train.py. The steps taken in the python script were as follows:
 
-1 - Import the banking dataset using Azure TabularDataset Factory
+- Import the banking dataset using Azure TabularDataset Factory
 
-2 - Data is then cleaned and transformed using a cleaning function
+- Data is then cleaned and transformed using a cleaning function
 
-3 - Processed data is then split into a training and testing set
+- Processed data is then split into a training and testing set
 
-4 - Scikit-learn was used to train an initial Logistic Regression model while specificing the value of two hyper parameters, C and max_iter. C represents the inverse of the regularization strength, while max_iter represents the maximum number of interations taken for the model to converge. These two parameters were initially passed in the python script so they can be optimised later on using Hyperdrive.
+- Scikit-learn was used to train an initial Logistic Regression model while specificing the value of two hyper parameters, C and max_iter. C represents the inverse of the regularization strength, while max_iter represents the maximum number of interations taken for the model to converge. These two parameters were initially passed in the python script so they can be optimised later on using Hyperdrive.
 
-5 - The trained model is then saved
+- The trained model is then saved
 
 The model had parameters of C = 0.1 and max_iter = 100, and achieved an accuracy of 91.43%
 
@@ -36,16 +36,20 @@ The initial model trained is then optimised using Hyperdrive. Hyperdrive is a me
 
 The steps taken to implement Hyperdrive were as follows:
 
-1 - Configuration of the Azure cloud resources
-2 - Configuring the Hyperdrive
-3 - Running the Hyperdrive
-4 - Retrieving the model with the parameters that gave the best model
+- Configuration of the Azure cloud resources
+
+- Configuring the Hyperdrive
+
+- Running the Hyperdrive
+
+- Retrieving the model with the parameters that gave the best model
 
 Elaborating more on the second step in configuring the Hyperdrive, there are two extremely beneficial parameters that are included in the configuration; RandomParameterSampling and BanditPolicy.
 
 **RandomParameterSampling** is a parameter sampler that randomly selects hyperparameter values from a wide range specified by the user to train the model. This is much better than a grid sweep as it is not as computationally expensive and time-consuming, and can choose parameters that achieve high accuracy. Random sampler also supports early termination of low-performance runs, thus saving on computational resources. The parameters passed to the random sampler were:
 
 - C: 0.01,0.1,10,100
+
 - max_iter: 50,100,150,200
 
 **BanditPolicy** is an early termination policy that terminates runs early if they are not achieving the same perfomance as the best model. This also adds to improving computational efficiency and saving time as it automatically terminates models with a poor perfomance.
@@ -56,10 +60,10 @@ The best model had parameters of C = 10 and max_iter = 50, and achieved an accur
 
 The steps taken to implement AutoML were as follows:
 
-1 - Import the banking dataset using Azure TabularDataset Factory
-2 - Data is then cleaned and transformed using the cleaning function in train.py
-3 - AutoML was configured and a run was submitted to find the model with the best performace
-4 - The best model was saved
+- Import the banking dataset using Azure TabularDataset Factory
+- Data is then cleaned and transformed using the cleaning function in train.py
+- AutoML was configured and a run was submitted to find the model with the best performace
+- The best model was saved
 
 The best performing model was a Voting Ensemble model with an accuracy of 91.78%. The hyper parameters of the model were as follows:
 
