@@ -13,7 +13,6 @@ The aim of the algorithms built using the Python SDK (w/ Hyperdrive) and AutoML 
 The best performing model was found using the AutoML run and was a Voting Ensemble with an accuracy of 91.78%. However, the Logistic classifier trained using Hyperdrive had an accuracy of 91.44% which is very close to the accuracy of the Voting Ensemble model.
 
 ## Scikit-learn and Hyperdrive Pipeline
-**Explain the pipeline architecture, including data, hyperparameter tuning, and classification algorithm.**
 
 ### Scikit-learn
 
@@ -32,6 +31,18 @@ A Logistic Regression model was first created and trained using Scikit-learn in 
 
 ### Hyper Drive
 
+The initial model trained is then optimised using Hyperdrive. Hyperdrive is a method of implementing automatic hyperparameter tuning. Hyperparameter tuning is typically computationally expensive and manual, therefore, by using Hyperdrive we are able to automate this process and run experiments in parallel to efficiently optimize hyperparameters.
+
+The steps taken to implement Hyperdrive were as follows:
+
+1 - Configuration of the Azure cloud resources
+2 - Configuring the Hyperdrive
+3 - Running the Hyperdrive
+4 - Retrieving the model with the parameters that gave the best model
+
+Elaborating more on the second step in configuring the hyper drive, there are two extremely beneficial parameters that are included in the configuration; RandomParameterSampling and BanditPolicy.
+
+**RandomParameterSampling** is a parameter sampler that 
 
 **What are the benefits of the parameter sampler you chose?**
 
