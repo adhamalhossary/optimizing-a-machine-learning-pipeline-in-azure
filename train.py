@@ -14,11 +14,7 @@ ds = TabularDatasetFactory.from_delimited_files("https://automlsamplenotebookdat
 
 run = Run.get_context()
 
-
-# TODO: Create TabularDataset using TabularDatasetFactory
-# Data is located at:
-# "https://automlsamplenotebookdata.blob.core.windows.net/automl-sample-notebook-data/bankmarketing_train.csv"
-
+# Function for cleaning and transforming dataset 
 def clean_data(data):
     # Dict for cleaning data
     months = {"jan":1, "feb":2, "mar":3, "apr":4, "may":5, "jun":6, "jul":7, "aug":8, "sep":9, "oct":10, "nov":11, "dec":12}
@@ -52,17 +48,6 @@ x, y = clean_data(ds)
 x_train, x_test, y_train, y_test = train_test_split(x,y, random_state=0)
 
 
-# TODO: Split data into train and test sets.
-
-# ## YOUR CODE HERE ###
-
-# split_length = round(x.shape[0]*0.75)
-
-# x_train = x[:split_length]
-# y_train = y[:split_length]
-
-# x_test = x[split_length:]
-# y_test = y[split_length:]
 
 def main():
     # Add arguments to script
