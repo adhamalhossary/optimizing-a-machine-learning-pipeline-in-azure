@@ -88,7 +88,10 @@ I think the main advantage of automl compared to hyperdrive is the ability of au
 
 ## Future work
 
-The main area of improvement is to take the voting ensemble algorithm from the automl run and tune the hyper parameters using hyper drive to achieve better accuracy. We could also take the top five performing models and try and optimize them as well.
+The main area of improvement is to take the voting ensemble algorithm from the AutoML run and tune the hyper parameters using Hyperdrive. AutoML uses Bayesian Optimization to choose the best hyper parameters. It would be beneficial to use hyperdrive and try different parameter sampling methods including random and grid parameter sampling. These methods might detect a different set of hyper parameters that give a better accuracy than those chosen by AutoML.
 
-We could also test the models' performances from the hyperdrive and automl runs against different error metrics such as the AUC.
+We know that the bank is particularly interested in accurately identifying clients that are more willing to subscribe. Additionally, identifying someone that is not willing to subscribe to the bank’s deposit as someone who does would be detrimental to the bank as it will be a waste of resources. Therefore, a model's ability to precisely predict those who are willing to donate is more important than the model's ability to recall those individuals. Thus, we can use F-beta score as a metric that considers both precision and recall: 
 
+![f-beta score](https://github.com/adhamalhossary/optimizing-a-machine-learning-pipeline-in-azure/blob/main/f-beta%20score.svg)
+
+Using a beta of 0.5 will place more emphasis on precision. We would then use the F-beta score instead of accuracy to test both the hyperdrive to see which hyper parameters give the best f-beta score, and which model from AutoML would as well.
