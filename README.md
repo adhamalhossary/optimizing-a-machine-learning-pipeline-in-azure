@@ -77,12 +77,16 @@ The best performing model was a Voting Ensemble model with an accuracy of 91.78%
 - verbose = 0
 - warm_start = False
 
+More on voting classifiers can be found in the following links:
+
+- https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.VotingClassifier.html
+- https://scikit-learn.org/stable/modules/ensemble.html#voting-classifier
+
 ## Pipeline Comparison
 When comparing both pipelines together, AutoML seems to have the advantage due to:
 
 - Less steps taken to find the best model (Simpler architecture)
 - Achieved better accuracy
-- Time and runs?
 
 I think the main advantage of automl compared to hyperdrive is the ability of automl to test different algorithms easily. We might think that the model chosen was the best for this problem and try to optimize the hyperparameters using hyperdrive. However, there might be a model we haven't tested that might perform better than the model we chose, which is what happened in this project. 
 
